@@ -1,0 +1,90 @@
+/* The dropdown box is based off YouTuber Mazen Salah's Step by step video
+    at link: https://m.youtube.com/watch?v=lcXjEqGXv14&t=37s */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 200px;
+}
+
+.dropdown-box {
+    width: 300px;
+    position: relative;
+}
+
+.dropdown-box input {
+    width: 100%;
+    border: 1px solid rgb(62, 145, 219);
+    outline: none;
+    border-radius: 5px;
+    padding: 3px 5px;
+    color: rgv(80 80 80);
+}
+
+.dropdown-box .selected-item {
+    position: relative;
+}
+
+.dropdown-box .selected-item::after {
+    content: "";
+    width: 3px;
+    height: 3px;
+    border: 2px solid;
+    border-color: transparent rgb(65, 218, 111) rgb(65 218 111) transparent;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-70%) rotate(45deg);
+}
+
+.dropdown-box .selected-item,
+.dropdown-box .selected-item input {
+    cursor: pointer;
+}
+
+.dropdown-box .dropdown-content {
+    box-shadow: 0 5px 15px rgb(0 0 0 / 15%); /* box-shadow black with opacity of 15% */
+    border-radius: 5px;
+    max-height: 240px;
+    overflow: auto;
+    display: none;
+    position: absolute;
+    z-index: 50;
+    background-color: rgb(255 255 255);
+    width: 100%;
+}
+
+.dropdown-box.active .dropdown-content {
+    display: block;
+}
+
+.dropdown-box .dropdown-content .search-input {
+    padding: 5px;
+}
+
+.dropdown-box .dropdown-content ul {
+    list-style: none;
+}
+
+.dropdown-box .dropdown-content ul li {
+    font-size: 0.8rem;
+    padding: 2px 5px;
+    cursor: pointer;
+}
+
+.dropdown-box .dropdown-content ul li:hover {
+    background-color: rgb(245 245 245);
+}
+
+.dropdown-box .dropdown-content ul li.active {
+    background-color: rgb(213 242 246);
+    color: rgb(89, 89, 222);
+}
