@@ -8,12 +8,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Montse's Memory Games: A Collection of Pre-teen Projects</title>
         <link href="style.css" rel="stylesheet">
-        <script src="script.js"></script>
+        <script src="script.js" defer></script>
         <!-- type="module" -->
     </head>
     <body>
-        <h1> Montse's Memory Games: </h1>
-        <h2> A Collection of Pre-teen Projects </h2>
+        <h1> Montse's Memory Games: A Collection of Pre-teen Projects </h1>
             <section class = "container-dropdown">
                 <div class="dropdown-box">
                     <!-- The dropdown box is based off YouTuber Mazen Salah's Step by step video
@@ -26,17 +25,28 @@
                                 <input type="text" name="" id="">
                             </div>
                         <ul>
-                            <li class="archive-record dropdown-item active">Select</li>
-                            <li class="archive-record dropdown-item">All Collection Items</li>
-                            <li class="archive-record dropdown-item">Stop Motion Films</li>
-                            <li class="archive-record dropdown-item">Images</li>
-                            <li class="archive-record dropdown-item">Film Editing: Match Cuts</li>
-                            <li class="archive-record dropdown-item">Film Editing: Playing with Filters</li>
+                            <!-- <li class="dropdown-item active" data-filter="all">Select</li>
+                            <li class="dropdown-item" data-filter="all-collection">All Collection Items</li> -->
+                            <li class="dropdown-item active">Select</li>
+                            <li class="dropdown-item">All Collection Items</li>
+                            <li class="dropdown-item">Stop Motion Films</li>
+                            <li class="dropdown-item">Images</li>
+                            <li class="dropdown-item">Film Editing: Match Cuts</li>
+                            <li class="dropdown-item">Film Editing: Playing with Filters</li>
                         </ul>
+                        <!-- obj container need to add id and categories (started adding in js json -->
                     </div>
                 </div>
             </section>
-            <main class="content">
+            <!-- from 05_changing_display -->
+            <section class="filters">
+                <!-- <select name="genre" id="genre">
+                  <option selected>All Genres</option>
+                </select> -->
+              </section>
+              <section class="wrapper"></section>
+
+            <!-- <main class="content">
                 <h1>Archive Name</h1>
                 <section class="archive-grid">
                   <div class="archive-record">Item 1</div>
@@ -48,8 +58,10 @@
                   <div class="archive-record">Item 7</div>
                   <div class="archive-record">Item 8</div>
                   <div class="archive-record">Item 9</div>
-                  <div class="archive-record">Item 10</div>
+                  <div class="archive-record">Item 10</div> -->
                 </section>
+                <!-- <button id="closeButton">X</button> -->
             </main>
+            <img src="card-backing-montse-memory-game.png" alt="Black and white playing card back displaying silly faces, checkerboard, and spinner."></img>
     </body>
 </html>
