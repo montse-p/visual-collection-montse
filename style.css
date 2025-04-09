@@ -8,17 +8,23 @@
 }
 
 h1 {
-    margin-top: 30px;
+    margin-top: 2.5em;
     /* margin-bottom: 10px; */
     width: 100%;
     /* display: flex; */
     /* align-items: center; */
     /* justify-content: space-around; */
-    /* text-align:center; */
+    text-align:center;
     padding: 0 50px;
     /* Text outline and stoke effects in h1 and h2: Stroke effect in h2 Stack Overflow answer by Kyle;
     Outline effect in h1 inspo from user128511
     https://stackoverflow.com/questions/4919076/outline-effect-to-text */
+
+    /* FIX!!!!!!
+    
+    
+    
+    */
     text-shadow: 0.0px 10.0px 0.02px #df9ac7, 9.8px 2.1px 0.02px #df9ac7, 4.2px -9.1px 0.02px #df9ac7, -8.0px -6.0px 0.02px #df9ac7, -7.6px 6.5px 0.02px #df9ac7, 4.8px 8.8px 0.02px #df9ac7, 9.6px -2.8px 0.02px #df9ac7, -0.7px -10.0px 0.02px #df9ac7, -9.9px -1.5px 0.02px #df9ac7, -3.5px 9.4px 0.02px #df9ac7, 8.4px 5.4px 0.02px #df9ac7, 7.1px -7.0px 0.02px #df9ac7, -5.4px -8.4px 0.02px #df9ac7, -9.4px 3.5px 0.02px #df9ac7, 1.4px 9.9px 0.02px #df9ac7, 10.0px 0.8px 0.02px #df9ac7, 2.9px -9.6px 0.02px #df9ac7, -8.7px -4.8px 0.02px #df9ac7, -6.6px 7.5px 0.02px #df9ac7, 5.9px 8.0px 0.02px #df9ac7, 9.1px -4.1px 0.02px #df9ac7, -2.1px -9.8px 0.02px #df9ac7, -10.0px -0.1px 0.02px #df9ac7, -2.2px 9.8px 0.02px #df9ac7, 9.1px 4.2px 0.02px #df9ac7, 6.1px -8.0px 0.02px #df9ac7, -6.5px -7.6px 0.02px #df9ac7, -8.8px 4.7px 0.02px #df9ac7, 2.7px 9.6px 0.02px #df9ac7, 10.0px -0.6px 0.02px #df9ac7, 1.5px -9.9px 0.02px #df9ac7, -9.3px -3.6px 0.02px #df9ac7, -5.5px 8.4px 0.02px #df9ac7, 7.0px 7.2px 0.02px #df9ac7, 8.5px -5.3px 0.02px #df9ac7, -3.4px -9.4px 0.02px #df9ac7, -9.9px 1.3px 0.02px #df9ac7, -0.8px 10.0px 0.02px #df9ac7, 9.6px 2.9px 0.02px #df9ac7, 4.9px -8.7px 0.02px #df9ac7, -7.5px -6.7px 0.02px #df9ac7, -8.1px 5.9px 0.02px #df9ac7, 4.0px 9.2px 0.02px #df9ac7, 9.8px -2.0px 0.02px #df9ac7, 0.2px -10.0px 0.02px #df9ac7, -9.7px -2.3px 0.02px #df9ac7, -4.3px 9.0px 0.02px #df9ac7, 7.9px 6.1px 0.02px #df9ac7;
     /* text-shadow: -2px -2px 0 #df9ac7, 2px -2px 0 #df9ac7, -2px 2px 0 #df9ac7, 2px 2px 0 #df9ac7; */
 }
@@ -28,34 +34,46 @@ h2 {
 
 }
 
+.intro {
+    font-size: 1em;
+    text-shadow: -1px -1px 0 #cdf3d2, 1px -1px 0 #cdf3d2, -1px 1px 0 #cdf3d2, 1px 1px 0 #cdf3d2;
+    margin: 0em 2em 0em 2em;
+}
+
 /* The dropdown box is based off YouTuber Mazen Salah's Step by step video
     at link: https://m.youtube.com/watch?v=lcXjEqGXv14&t=37s */
 
 body {
-    /* display: flex;
-    flex-direction: column; */
-    /* align-items: center; */
-    /* padding: 50px 200px; */
     margin: 20px;
-    /* background: rgb(223, 245, 174); */
-    background: rgb(108, 160, 114);
-    /* background: radial-gradient(circle, rgba(91,177,255,1) 36%, rgba(57,255,81,1) 82%); */
+    background: rgb(157, 230, 166);
+    background-image:
+        linear-gradient(
+        -45deg,
+        transparent 75%,
+        rgb(255, 194, 250)),
+        linear-gradient(
+        45deg,
+        transparent 75%,
+        rgb(255, 194, 250)),
+        linear-gradient(
+        -135deg,
+        transparent 75%,
+        rgb(255, 194, 250)),
+        linear-gradient(
+        135deg,
+        transparent 75%,
+        rgb(255, 194, 250));
+    background-size: 4rem 4rem;
+    background-position: 2rem 0, 2rem 0, 0 0, 0 0;
 }
-
 
 .container-dropdown {
     display: flex; 
     flex-direction: column;
-    /* align-items: center; */
-    /* padding: 50px 200px; */
-    /* box-sizing: border-box;
-    margin: 0;
-    padding: 0; */
 }
 
 .dropdown-box {
     width: 300px;
-    /* width: 100%; */
     position: relative;
 }
 
@@ -68,10 +86,16 @@ body {
     color: rgv(80 80 80);
 }
 
+
+/* For understanding what it means to have elements with more than one class refer to 
+https://stackoverflow.com/questions/13444647/css-class-definition-with-multiple-identifiers/13444826 */
 .dropdown-box .selected-item {
     position: relative;
 }
 
+/* ::after is a pseudo-element 
+"used to insert some content after the content of an element"
+https://www.w3schools.com/css/css_pseudo_elements.asp */
 .dropdown-box .selected-item::after {
     content: "";
     width: 3px;
@@ -132,44 +156,29 @@ body {
     color: rgb(89, 89, 222);
 }
 
-/* Archive Grid */
-/* .content {
-    flex: 1;
-    padding: 20px;
-  } */
 
-/* .archive-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-gap: 16px; */
-/* color: #0DCC6C;
-font-weight: 600; */
-/* } */
-
-/* .archive-record { */
-/* background: white; */
-/* padding: 15px; */
-/* background-color: #FFF3FA; */
-/* border-radius: 50% 20% / 10% 40%;
-} */
-
-/* From the "05_dynamically_adding_content" */
+/* From the Divya Mehra's "05_dynamically_adding_content"
+https://github.com/divya-mehra/dhwebdev-s25/tree/05a4413abfbec565bc2ae32d0bd6457e10c3464f/05_changing_display_with_dropdown */
 
 /* FIX THERE ARE 2 OF THESE */
-body {
+/* body {
     max-width: 1000px;
     margin: 0 auto;
     font-family: Helvetica, sans-serif;
-}
+} */
 
 .wrapper {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 200px);
-    gap: 2em;
-    margin: 2em 0;
+    /* Create Responsive CSS Grid Layouts with GRID WRAPPING
+    https://www.youtube.com/watch?v=3T0gjtXRNC0&t=19s */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* was 175px for minmax */
+    gap: 5px;
+    justify-content: center;
+    perspective: 1000px;
 }
 
-.filters {
+/* .filters {
     display: flex;
     gap: 2em;
     height: 50px;
@@ -177,7 +186,7 @@ body {
     align-items: center;
     top: 0;
     
-}
+} */
 
 .filter {
     cursor: pointer;
@@ -185,52 +194,87 @@ body {
 }
 
 
+/* FIX UMBRELLA SIZING */
+
+
+/* I FORGOT WHAT THIS WAS FOR */
 .wrapper > * {
     aspect-ratio: 2/3;
+    /* width: 15 rem;
+    height: calc(15 rem * 3/2); */
     /* border: 1px black solid; */
     padding: 1em;
+    /* padding: 1 rem; */
     /* width: 750px;
     height: 1050px; */
-    background-color: white;
+    /* background-color: white;
+    object-fit: cover; */
+    box-sizing: border-box;
 }
 
-.active {
+/* .active {
     font-weight: 600;
     text-decoration: underline;
-}
+} */
 
 /* To add */
 
-h2 {
+/* h2 {
     margin: 0;
-}
-
-
-/* Inspired by Football Detail Score Popup by Maxime Huylebroeck https://codepen.io/G_4s/pen/gLvrgO */
-/* Close X button for popup */
-/* .closeButton {
-    display: block;
-    position: 'absolute';
-    width: 20px;
-    height: 30px;
-    top: '15px';
-    right: '15px'; 
-    cursor: 'pointer'; 
-    background: transparent;
-    border: 'none';
-    font-size: '20px';
 } */
 
-/* .closeButton::before, .closeButton::after {
-    content:'';
-    display: block;
-    margin-top: 15px;
+
+/* card */
+/* How TO - Flip Card: https://www.w3schools.com/howto/howto_css_flip_card.asp */
+  .card {
+    /* 100 or 200 */
+    /* width: 166.67px;  */
+    width: 175px;
+    /* 150 or 300 */
+    /* height: 250px; */
+    height: 262.5px;
+    /* perspective: none;  */
+    /* perspective: 1000px;  */
+    /* Perspective is for 3D effect */
+    margin: 10px;
+    display: inline-block;
+    border: 1px solid #f1f1f1;
+    border-radius: 10px;
+    background-color: #df9ac7;
+    position: relative;
+  }
+  
+/* Transition for cards inspired by Codepen "card matching game"
+by nvite 8008: https://codepen.io/nvite8008/pen/rNrwBMV */
+/* Also help from ChatGPT on fixing mistakes */
+  .card .card-back,
+  .card .card-front {
     width: 100%;
-    border-bottom: 2px solid #F3EFF5;
-    transform: rotate(45deg);
-}
-
-.closeButton::after {
-    margin-top: -2px;
-    transform: rotate(-45deg);
-} */
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: 0.3s ease transform;
+    /* CSS Rounded Corners: https://www.w3schools.com/css/css3_borders.asp */
+    border-radius: 10px;
+  }
+  
+  .card .card-back {
+    background: #f0f0f0;
+    /* transform: rotateY(180deg); */
+  }
+  
+  .card .card-front {
+    background: #da6ac6;
+    /* CSS background-image Property: https://www.w3schools.com/cssref/pr_background-image.php */
+    background-image: url("card-backing-montse-memory-game.png");
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .card.flipped .card-front {
+    transform: rotateY(180deg);
+  }
+  
+  .card.flipped .card-back {
+    transform: rotateY(0deg);
+  }
