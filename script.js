@@ -145,9 +145,7 @@ let wrapper = document.querySelector(".wrapper");
     // WebDev course with Divya Mehra for random color: https://codepen.io/montse-p/pen/PwojGXg
 let colorList = ["#FFCCCB", "#FFD580", "#FFFFE0", "#90EE90", "#26F7FD", "#6D5ACF", "#CBC3E3"];
 
-// ChatGPT combined dropdown code here
-// ADD ALL NOTES FROM PREV CODE
-
+// Event listener for dropdown
 window.addEventListener("load", () => {
     // Initializing dropdown items
     const dropdownItems = document.querySelectorAll(".dropdown-item");
@@ -169,14 +167,6 @@ window.addEventListener("load", () => {
     dropdownItems.forEach(item => {
         item.addEventListener("click", () => {
             const selectedCategory = item.getAttribute("data-filter");
-            
-            // delete below as there is repetition
-            // // Update the dropdown text to show the selected category
-            // if (dropdownText) {
-            //     dropdownText.value = item.textContent;
-            // } else {
-            //     console.error("Dropdown input not found.");
-            // }
 
             // Filter the cards based on the selected category
             filterCards(selectedCategory);
@@ -300,6 +290,7 @@ function renderMemoryPairs(data, selectedCategory) {
         newDiv.setAttribute("data-id", memory.id);
         newDiv.setAttribute("data-cameraLens", memory.cameraLens); 
         newDiv.setAttribute("data-screenResolution", memory.screenResolution); 
+        newDiv.setAttribute("data-description", memory.description); 
         
         // Turn into a string that will be shown in card: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
         newDiv.dataset.memory = JSON.stringify(memory);
@@ -362,15 +353,6 @@ function renderMemoryPairs(data, selectedCategory) {
                     
                     // currentPopup ensures only 1 popup is displayed
                     currentPopup = popup;
-                    
-                    // // this did not change anything 
-                    // // I was having problems displaying just one popup;
-                    // // ChatGPT suggested to add event listener to close the popup and reset currentPopup
-                    // popup.querySelector("button").addEventListener('click', () => {
-                    //     // Close the popup and reset the currentPopup
-                    //     document.body.removeChild(popup);
-                    //     currentPopup = null;
-                    // });
 
                     // Close button event listener to reset currentPopup and allow new popups
                     const closeButton = popup.querySelector("button");
@@ -379,9 +361,6 @@ function renderMemoryPairs(data, selectedCategory) {
                         currentPopup = null;  // Reset currentPopup so new popups can be created
                     });
 
-                // // Mark cards as having had a popup shown
-                // card1.classList.add('popup-shown');
-                // card2.classList.add('popup-shown');
                 } 
             } else {
             // If the cards don't match they are flipped back over
@@ -394,21 +373,23 @@ function renderMemoryPairs(data, selectedCategory) {
         };
     });
 
+    // Get a random color for the popup background
+        // Based on Code Pen exercise from WebDev course with Divya Mehra for random color: https://codepen.io/montse-p/pen/PwojGXg
+    let randomColor = colorList[Math.floor(Math.random() * colorList.length)];
+
+
     function createPopup(memory, card1) {
         console.log("Popup Created for", card1.querySelector(".card-back h3").textContent);
-
-        // Get a random color for the popup background
-        let randomColor = colorList[Math.floor(Math.random() * colorList.length)];
 
         let popup = document.createElement('div');
         popup.classList.add("popup");
 
-        // Apply the popup styling
+        // Popup style CSS
         popup.style.position = 'fixed';
         popup.style.top = '50%';
         popup.style.left = '50%';
         popup.style.transform = 'translate(-50%, -50%) scale(0.9)';
-        popup.style.backgroundColor = randomColor;  // Set the random color here
+        popup.style.backgroundColor = randomColor;  // Set the random color
         popup.style.padding = '20px';
         popup.style.boxShadow = `12px 12px 2px 1px rgba(206, 108, 242, 0.2)`;
         popup.style.zIndex = '10000';
@@ -436,15 +417,17 @@ function renderMemoryPairs(data, selectedCategory) {
             popup.appendChild(sampleContainer);
         }
 
-        // Create and append the close button
+        // Close button CSS style
         let closeButton = document.createElement('button');
-        closeButton.textContent = 'X';
+        closeButton.innerHTML = '&times;' 
+            // How to use an entity with textContent
+            // https://stackoverflow.com/questions/49197622/how-to-use-an-entity-with-textcontent
         closeButton.style.position = 'absolute';
         closeButton.style.top = '10px';
-        closeButton.style.right = '10px';
+        closeButton.style.right = '20px';
         closeButton.style.background = 'transparent';
         closeButton.style.border = 'none';
-        closeButton.style.fontSize = '20px';
+        closeButton.style.fontSize = '40px';
         closeButton.style.cursor = 'pointer';
 
         // Close the popup when the button is clicked
