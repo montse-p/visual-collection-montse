@@ -260,7 +260,7 @@ by nvite 8008: https://codepen.io/nvite8008/pen/rNrwBMV */
   
   .card .card-back {
     background: #f0f0f0;
-    /* transform: rotateY(180deg); */
+    transform: rotateY(180deg);
   }
   
   .card .card-front {

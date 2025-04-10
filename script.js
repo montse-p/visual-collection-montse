@@ -136,306 +136,6 @@ const memories = [
     },
   ];
 
-// // define the popup globlly to reset
-
-// let currentPopup = null; // reset
-
-// // Establish functions and variables that allow for game to work
-// let wrapper = document.querySelector(".wrapper");
-
-// // colorList is used to change the background color 
-// // of the popup which appears when a pair of cards is selected
-//     // Based on Code Pen exercise from 
-//     // WebDev course with Divya Mehra for random color: https://codepen.io/montse-p/pen/PwojGXg
-// let colorList = ["#FFCCCB", "#FFD580", "#FFFFE0", "#90EE90", "#26F7FD", "#6D5ACF", "#CBC3E3"];
-
-// window.addEventListener("load", () => {
-//     // Initializing dropdown items
-//     const dropdownItems = document.querySelectorAll(".dropdown-item");
-//     const dropdownText = document.getElementById("dropdown-text");
-//     const selectedItemInput = document.querySelector(".selected-item input");
-//     const searchInput = document.querySelector(".search-input input");
-//     const dropdown = document.querySelector(".dropdown-box");
-//     const dropdownContent = document.querySelector(".dropdown-content");
-
-//     // All cards are shown when website is first loaded
-//     filterCards("all");
-
-//     // (1) Design of the dropdown box (does not initialize dropdown items)
-//         // Based off YouTuber Mazen Salah's Step by step video
-//         // at link: https://m.youtube.com/watch?v=lcXjEqGXv14&t=37s
-//         // Event Listener to control click in dropdown
-//         // Event listener for clicks on dropdown items
-//     // ChatGPT help with filtering dropdown button content on the screen
-//     dropdownItems.forEach(item => {
-//         item.addEventListener("click", () => {
-//             const selectedCategory = item.getAttribute("data-filter");
-            
-//             // delete below as there is repetition
-//             // // Update the dropdown text to show the selected category
-//             // if (dropdownText) {
-//             //     dropdownText.value = item.textContent;
-//             // } else {
-//             //     console.error("Dropdown input not found.");
-//             // }
-
-//             // Filter the cards based on the selected category
-//             filterCards(selectedCategory);
-
-//             // Mark the clicked item as active
-//             dropdownItems.forEach(innerDropdownItem => {
-//                 innerDropdownItem.classList.remove("active");
-//             });
-//             item.classList.add("active");
-
-//             // Update the selected item input field
-//             selectedItemInput.value = item.innerHTML;
-
-//             // Close the dropdown
-//             closeDropdown();
-//         });
-//     });
-
-//     // Event listener is for for the dropdown to close if something outside is pressed
-//     window.addEventListener("click", windowClickEvent => {
-//         // Check if the click was outside the dropdown
-//         if (dropdown.classList.contains("active")) {
-//             // Logical NOT (!): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_NOT
-//                 // returns false if dropdownContent AND (&&) dropdown was not clicked and something else on the screen was
-//             if (!dropdownContent.contains(windowClickEvent.target) && !dropdown.contains(windowClickEvent.target)) {
-//                 closeDropdown();
-//             }
-//         } else if (selectedItemInput.contains(windowClickEvent.target)) {
-//             openDropdown();
-//         }
-//     });
-
-//     // Event listener for filtering the dropdown items based on search input
-//     searchInput.addEventListener("keyup", () => {
-//         const filter = searchInput.value.toLocaleLowerCase();
-
-//         dropdownItems.forEach(dropdownItem => {
-//             if (dropdownItem.innerHTML.toLocaleLowerCase().includes(filter)) {
-//                 dropdownItem.classList.remove("hide");
-//             } else {
-//                 dropdownItem.classList.add("hide");
-//             }
-//         });
-//     });
-// });
-
-// // If function is called, the dropdown opens
-// function openDropdown() {
-//     const dropdown = document.querySelector(".dropdown-box");
-//     dropdown.classList.add("active");
-// }
-
-// // If function is called, the dropdown closes
-// function closeDropdown() {
-//     const dropdown = document.querySelector(".dropdown-box");
-//     dropdown.classList.remove("active");
-// }
-
-// // filterCards() function filters cards by selected category
-// function filterCards(category) {
-//     // .filter() is a built-in array method; https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
-//         // I use const filter earlier when filtering the dropdown. That is a variable and is not the same as below
-//     const filteredMemories = memories.filter(memory => {
-//         // If "all" is selected, show all memories
-//         if (category === "all") {
-//             return true;
-//         }
-
-//         // If the memory has a category array, check if the selected category is in it
-//         return memory.category.includes(category.toLowerCase());
-//     });
-
-//     // Render the filtered memories
-//     // renderMemories(filteredMemories);
-//     // renderMemoryPairs(memories, selectedCategory);
-//     renderMemoryPairs(filteredMemories, category);
-// }
-
-// // Render with the memory card pairs
-// function renderMemoryPairs(data, selectedCategory) {
-// // let renderMemoryPairs = (data, selectedCategory) => {
-//     // log to check it's working
-//     // console.log(data); 
-//   let wrapper = document.querySelector(".wrapper");
-
-//   // Filter the memory data based on selected category;
-//     let filteredData;
-
-//     if (selectedCategory === "all") {
-//         filteredData = data;
-//         } 
-//     else {
-//         filteredData = data.filter(memory => {
-//             // && AND
-//             return memory.category && memory.category.includes(selectedCategory);
-//         });
-//         // filteredData = data.filter(memory => memory.category.includes(selectedCategory));
-//         }
-
-//     wrapper.innerHTML = ""; // Also done in render memories function
-
-//   // Make two of each memory
-//   let memoryPairs = [];
-  
-//     // ChatGPT recommended using a spread operator to make a shallow copy {...memory}
-//     // since referencing one object might affect the synchronization of cards flipped or not
-//     filteredData.forEach(memory => {
-//         memoryPairs.push({ ...memory }, { ...memory });
-//     });
-
-//   // Shuffle deck
-//     // Shuffling an Array in JavaScript By Alexandria Pestruyeva 
-//     // https://medium.com/@apestruy/shuffling-an-array-in-javascript-8fcbc5ff12c7
-//     // NOTE there are better ways to get more unbiased shuffling (i.e. Fisher-Yates or Durstenfeld algorithm)
-//         // but this is not important for the purposes of the project
-//     memoryPairs = memoryPairs.sort(() => Math.random() - 0.5);
-
-//     // Render memory cards
-//     memoryPairs.forEach((memory) => {
-//         let newDiv = document.createElement("div");
-//         newDiv.classList.add("card");
-//         newDiv.setAttribute("data-backedUpDate", memory.backedUpDate);
-//         newDiv.setAttribute("data-id", memory.id);
-//         newDiv.setAttribute("data-cameraLens", memory.cameraLens); 
-//         newDiv.setAttribute("data-screenResolution", memory.screenResolution); 
-        
-//         // Turn into a string that will be shown in card: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
-//         newDiv.dataset.memory = JSON.stringify(memory);
-
-//     // HTML for card content
-//     // for the cartoons, I added alt text 
-//     // explaining that the image was described by the title on the card
-//     // in order to use id and not have to input all the pngs into the objects
-//         newDiv.innerHTML = `
-//         <div class="card-back">
-//             <h3>${memory.title}</h3>
-//             <p>${memory.people}</p>
-//             <img src="cartoon${memory.id}.png" alt="Cartoon of collection item title."
-//             style="max-width: 100%; height: auto;"> </div>
-//         <div class="card-front"></div>
-//         `;
-
-//         // Add new card
-//         wrapper.append(newDiv);
-//     });
-
-//   let flippedCards = [];
-//   let matchedCards = [];
-
-//     // Add click event listener to flip cards and check for matches
-//     wrapper.addEventListener("click", (e) => {
-//         let clickedCard = e.target.closest(".card");
-//         // // log to check it's working
-//         // console.log(clickedCard);
-
-//         // Ignore if clicked element is not a card or if two cards are already flipped
-//             // Note in js || is or operator: https://stackoverflow.com/questions/30108466/what-is-the-meaning-of-in-javascript
-//         if (!clickedCard || flippedCards.length === 2 || matchedCards.includes(clickedCard) || flippedCards.includes(clickedCard)) {
-//             return;
-//         }
-
-//     // Flip the clicked card
-//     clickedCard.classList.add("flipped");
-//     flippedCards.push(clickedCard);
-
-//     // If 2 cards are clicked, then check if they match
-//     if (flippedCards.length === 2) {
-//       let [card1, card2] = flippedCards;
-
-//       // Check that card pairs selected match
-//       if (card1.getAttribute("data-id") === card2.getAttribute("data-id")) {
-//         matchedCards.push(card1, card2);
-//         flippedCards = []; // reset
-
-//         // // Popup if cards match; display the JSON stored data
-//             let memory = JSON.parse(card1.dataset.memory);
-
-//             // Create the popup
-//             let popup = createPopup(memory, card1);
-//             document.body.appendChild(popup);
-//             } else {
-//             setTimeout(() => {
-//                 card1.classList.remove("flipped");
-//                 card2.classList.remove("flipped");
-//                 flippedCards = [];
-//             }, 1000);
-//             }
-//         }
-//         });
-//     };
-
-//     // Get a random color for the popup background
-//     let randomColor = colorList[Math.floor(Math.random() * colorList.length)];
-
-//     // Function to create popup content
-//     function createPopup(memory, card1) {
-//         // Create the popup using css
-//         let popup = document.createElement('div');
-//         popup.style.position = 'fixed';
-//         popup.style.top = '50%';
-//         popup.style.left = '50%';
-//         popup.style.transform = 'translate(-50%, -50%) scale(0.9)';
-//         popup.style.backgroundColor = randomColor;
-//         popup.style.padding = '20px';
-//         popup.style.boxShadow = 12px 12px 2px 1px rgba(206, 108, 242, 0.2);
-//         popup.style.zIndex = '10000';
-//         popup.style.maxWidth = '70%';
-//         popup.style.maxHeight = '70%';
-//         popup.style.overflow = 'hidden';
-//         popup.style.boxSizing = 'border-box';
-//         popup.style.transition = 'all 0.3s ease-in-out';
-
-//         // Add information that shows up on each object in the popup
-//         let popupContent = `
-//           <h2>${card1.querySelector(".card-back h3").textContent}</h2>
-//           <p>People: ${card1.querySelector(".card-back p").textContent}</p>
-//           <p>Backed up on: ${card1.getAttribute("data-backedUpDate")}</p>
-//           <p>Camera Lens: ${card1.getAttribute("data-cameraLens")}</p>
-//           <p>Screen Resolution: ${card1.getAttribute("data-screenResolution")}</p>
-//           <p>Description: ${card1.getAttribute("data-description")}</p>
-//         `;
-
-//         popup.innerHTML = popupContent;
-
-//         // Append the connected project
-//         let sampleContainer = document.createElement('div');
-//         sampleContainer.innerHTML = memory.sample;
-//         popup.appendChild(sampleContainer);
-
-//         // Create and append the close button
-//         let closeButton = document.createElement('button');
-//         closeButton.textContent = 'X';
-//         closeButton.style.position = 'absolute';
-//         closeButton.style.top = '10px';
-//         closeButton.style.right = '10px';
-//         closeButton.style.background = 'transparent';
-//         closeButton.style.border = 'none';
-//         closeButton.style.fontSize = '20px';
-//         closeButton.style.cursor = 'pointer';
-
-//         // Close the popup when the button is clicked
-//         closeButton.addEventListener('click', () => {
-//           document.body.removeChild(popup);
-//           currentPopup = null;  // Reset
-//         });
-
-//         // Append the close button to the popup
-//         popup.appendChild(closeButton);
-//         return popup;
-// }
-
-// // Page load
-// renderMemoryPairs(memories, "all");
-
-// // // Call the function to render the memories
-// // renderMemoryPairs(memories, selectedCategory);
-
-
 // Establish functions and variables that allow for game to work
 let wrapper = document.querySelector(".wrapper");
 
@@ -557,9 +257,7 @@ function filterCards(category) {
 
 // Render with the memory card pairs
 function renderMemoryPairs(data, selectedCategory) {
-// let renderMemoryPairs = (data, selectedCategory) => {
-    // log to check it's working
-    // console.log(data); 
+
   let wrapper = document.querySelector(".wrapper");
 
   // Filter the memory data based on selected category;
@@ -578,8 +276,8 @@ function renderMemoryPairs(data, selectedCategory) {
 
     wrapper.innerHTML = ""; // Also done in render memories function
 
-  // Make two of each memory
-  let memoryPairs = [];
+    // Make two of each memory
+    let memoryPairs = [];
   
     // ChatGPT recommended using a spread operator to make a shallow copy {...memory}
     // since referencing one object might affect the synchronization of cards flipped or not
@@ -587,7 +285,7 @@ function renderMemoryPairs(data, selectedCategory) {
         memoryPairs.push({ ...memory }, { ...memory });
     });
 
-  // Shuffle deck
+    // Shuffle deck
     // Shuffling an Array in JavaScript By Alexandria Pestruyeva 
     // https://medium.com/@apestruy/shuffling-an-array-in-javascript-8fcbc5ff12c7
     // NOTE there are better ways to get more unbiased shuffling (i.e. Fisher-Yates or Durstenfeld algorithm)
@@ -606,18 +304,18 @@ function renderMemoryPairs(data, selectedCategory) {
         // Turn into a string that will be shown in card: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
         newDiv.dataset.memory = JSON.stringify(memory);
 
-    // HTML for card content
-    // for the cartoons, I added alt text 
-    // explaining that the image was described by the title on the card
-    // in order to use id and not have to input all the pngs into the objects
-    newDiv.innerHTML = `
-      <div class="card-back">
-        <h3>${memory.title}</h3>
-        <p>${memory.people}</p>
-        <img src="cartoon${memory.id}.png" alt="Cartoon of collection item title."
-        style="max-width: 100%; height: auto;"> </div>
-      <div class="card-front"></div>
-    `;
+        // HTML for card content
+        // for the cartoons, I added alt text 
+        // explaining that the image was described by the title on the card
+        // in order to use id and not have to input all the pngs into the objects
+        newDiv.innerHTML = `
+        <div class="card-back">
+            <h3>${memory.title}</h3>
+            <p>${memory.people}</p>
+            <img src="cartoon${memory.id}.png" alt="Cartoon of collection item title."
+            style="max-width: 100%; height: auto;"> </div>
+        <div class="card-front"></div>
+        `;
 
         // Add new card
         wrapper.append(newDiv);
@@ -639,159 +337,72 @@ function renderMemoryPairs(data, selectedCategory) {
             return;
         }
 
-    // Flip the clicked card
-    clickedCard.classList.add("flipped");
-    flippedCards.push(clickedCard);
+        // Flip the clicked card
+        clickedCard.classList.add("flipped");
+        flippedCards.push(clickedCard);
 
-    // If 2 cards are clicked, then check if they match
-    if (flippedCards.length === 2) {
-      let [card1, card2] = flippedCards;
+        // If 2 cards are clicked, then check if they match
+        if (flippedCards.length === 2) {
+            let [card1, card2] = flippedCards;
 
-        // Check that card pairs selected match
-        if (card1.getAttribute("data-id") === card2.getAttribute("data-id")) {
-            matchedCards.push(card1, card2);
-            flippedCards = [];
+            // Check that card pairs selected match by memory id
+            if (card1.getAttribute("data-id") === card2.getAttribute("data-id")) {
+                matchedCards.push(card1, card2);
+                flippedCards = [];
 
                 // Check if popup was already created
                 if(!currentPopup) {
-                // if (!card1.classList.contains('popup-shown') && !card2.classList.contains('popup-shown')) {
 
-                // Popup if cards match; display the JSON stored data
-                let memory = JSON.parse(card1.dataset.memory);
+                    // Popup if cards match; display the JSON stored data
+                    let memory = JSON.parse(card1.dataset.memory);
 
-                // Create the popup
-                let popup = createPopup(memory, card1);
-                document.body.appendChild(popup);
+                    // Create the popup
+                    let popup = createPopup(memory, card1);
+                    document.body.appendChild(popup);
+                    
+                    // currentPopup ensures only 1 popup is displayed
+                    currentPopup = popup;
+                    
+                    // // this did not change anything 
+                    // // I was having problems displaying just one popup;
+                    // // ChatGPT suggested to add event listener to close the popup and reset currentPopup
+                    // popup.querySelector("button").addEventListener('click', () => {
+                    //     // Close the popup and reset the currentPopup
+                    //     document.body.removeChild(popup);
+                    //     currentPopup = null;
+                    // });
 
-                currentPopup = popup;
+                    // Close button event listener to reset currentPopup and allow new popups
+                    const closeButton = popup.querySelector("button");
+                    closeButton.addEventListener('click', () => {
+                        document.body.removeChild(popup);
+                        currentPopup = null;  // Reset currentPopup so new popups can be created
+                    });
 
                 // // Mark cards as having had a popup shown
                 // card1.classList.add('popup-shown');
                 // card2.classList.add('popup-shown');
                 } 
-                else {
-                    setTimeout(() => {
-                        card1.classList.remove("flipped");
-                        card2.classList.remove("flipped");
-                        flippedCards = [];
-                    }, 1000);
-                }
+            } else {
+            // If the cards don't match they are flipped back over
+                setTimeout(() => {
+                    card1.classList.remove("flipped");
+                    card2.classList.remove("flipped");
+                    flippedCards = [];
+                }, 1000); // 1000 is a one second delay
             }
         };
     });
 
-    // Get a random color for the popup background
-    let randomColor = colorList[Math.floor(Math.random() * colorList.length)];
-
-//     // Function to create popup content
-//     function createPopup(memory, card1) {
-
-//         let popup = document.createElement('div');
-//         popup.classList.add("popup");
-//         popup.style.backgroundColor = randomColor;
-
-//         // Create the popup using css
-//         popup.style.position = 'fixed';
-//         popup.style.top = '50%';
-//         popup.style.left = '50%';
-//         popup.style.transform = 'translate(-50%, -50%) scale(0.9)';
-//         popup.style.backgroundColor = randomColor;
-//         popup.style.padding = '20px';
-//         popup.style.boxShadow = `12px 12px 2px 1px rgba(206, 108, 242, 0.2)`;
-//         popup.style.zIndex = '10000';
-//         popup.style.maxWidth = '70%';
-//         popup.style.maxHeight = '70%';
-//         popup.style.overflow = 'hidden';
-//         popup.style.boxSizing = 'border-box';
-//         popup.style.transition = 'all 0.3s ease-in-out';
-
-//         // Add information that shows up on each object in the popup
-//         let popupContent = `
-//           <h2>${card1.querySelector(".card-back h3").textContent}</h2>
-//           <p>People: ${card1.querySelector(".card-back p").textContent}</p>
-//           <p>Backed up on: ${card1.getAttribute("data-backedUpDate")}</p>
-//           <p>Camera Lens: ${card1.getAttribute("data-cameraLens")}</p>
-//           <p>Screen Resolution: ${card1.getAttribute("data-screenResolution")}</p>
-//           <p>Description: ${card1.getAttribute("data-description")}</p>
-//         `;
-
-//         popup.innerHTML = popupContent;
-
-//         // Append the connected project
-//         let sampleContainer = document.createElement('div');
-//         sampleContainer.innerHTML = memory.sample;
-//         popup.appendChild(sampleContainer);
-
-//         // Create and append the close button
-//         let closeButton = document.createElement('button');
-
-//             // close button CSS
-//             closeButton.textContent = 'X';
-//             closeButton.style.position = 'absolute';
-//             closeButton.style.top = '10px';
-//             closeButton.style.right = '10px';
-//             closeButton.style.background = 'transparent';
-//             closeButton.style.border = 'none';
-//             closeButton.style.fontSize = '20px';
-//             closeButton.style.cursor = 'pointer';
-
-//         // Close the popup when the button is clicked
-//         closeButton.addEventListener('click', () => {
-//           document.body.removeChild(popup);
-//           currentPopup = null;  // Reset
-//         });
-
-//         // Append the close button to the popup
-//         popup.appendChild(closeButton);
-//         return popup;
-// }
-
-// Function to create popup content
-function createPopup(memory, card1) {
-    console.log("Popup Created for", card1.querySelector(".card-back h3").textContent);
-
-    let popup = document.createElement('div');
-    popup.classList.add("popup");
-
-    // Apply the popup styling
-    popup.style.position = 'fixed';
-    popup.style.top = '50%';
-    popup.style.left = '50%';
-    popup.style.transform = 'translate(-50%, -50%) scale(0.9)';
-    popup.style.backgroundColor = randomColor;  // Set the random color here
-    popup.style.padding = '20px';
-    popup.style.boxShadow = `12px 12px 2px 1px rgba(206, 108, 242, 0.2)`;
-    popup.style.zIndex = '10000';
-    popup.style.maxWidth = '70%';
-    popup.style.maxHeight = '70%';
-    popup.style.overflow = 'hidden';
-    popup.style.boxSizing = 'border-box';
-    popup.style.transition = 'all 0.3s ease-in-out';
-
-    // Add information that shows up on each object in the popup
-    let popupContent = `
-        <h2>${card1.querySelector(".card-back h3").textContent}</h2>
-        <p>People: ${card1.querySelector(".card-back p").textContent}</p>
-        <p>Backed up on: ${card1.getAttribute("data-backedUpDate")}</p>
-        <p>Camera Lens: ${card1.getAttribute("data-cameraLens")}</p>
-        <p>Screen Resolution: ${card1.getAttribute("data-screenResolution")}</p>
-        <p>Description: ${card1.getAttribute("data-description")}</p>
-    `;
-    popup.innerHTML = popupContent;
-
-    // Append the connected project sample if available
-    if (memory.sample) {
-        let sampleContainer = document.createElement('div');
-        sampleContainer.innerHTML = memory.sample;
-        popup.appendChild(sampleContainer);
-    }
-
     function createPopup(memory, card1) {
         console.log("Popup Created for", card1.querySelector(".card-back h3").textContent);
-    
+
+        // Get a random color for the popup background
+        let randomColor = colorList[Math.floor(Math.random() * colorList.length)];
+
         let popup = document.createElement('div');
         popup.classList.add("popup");
-    
+
         // Apply the popup styling
         popup.style.position = 'fixed';
         popup.style.top = '50%';
@@ -806,7 +417,7 @@ function createPopup(memory, card1) {
         popup.style.overflow = 'hidden';
         popup.style.boxSizing = 'border-box';
         popup.style.transition = 'all 0.3s ease-in-out';
-    
+
         // Add information that shows up on each object in the popup
         let popupContent = `
             <h2>${card1.querySelector(".card-back h3").textContent}</h2>
@@ -817,14 +428,14 @@ function createPopup(memory, card1) {
             <p>Description: ${card1.getAttribute("data-description")}</p>
         `;
         popup.innerHTML = popupContent;
-    
+
         // Append the connected project sample if available
         if (memory.sample) {
             let sampleContainer = document.createElement('div');
             sampleContainer.innerHTML = memory.sample;
             popup.appendChild(sampleContainer);
         }
-    
+
         // Create and append the close button
         let closeButton = document.createElement('button');
         closeButton.textContent = 'X';
@@ -835,83 +446,18 @@ function createPopup(memory, card1) {
         closeButton.style.border = 'none';
         closeButton.style.fontSize = '20px';
         closeButton.style.cursor = 'pointer';
-    
+
         // Close the popup when the button is clicked
         closeButton.addEventListener('click', () => {
             document.body.removeChild(popup);
             currentPopup = null;  // Reset currentPopup to allow for future popups
         });
-    
+
         // Append the close button to the popup
         popup.appendChild(closeButton);
-        
+
         return popup;
     }
-    };
-function createPopup(memory, card1) {
-    console.log("Popup Created for", card1.querySelector(".card-back h3").textContent);
-
-    // Get a random color for the popup background
-    let randomColor = colorList[Math.floor(Math.random() * colorList.length)];
-
-    let popup = document.createElement('div');
-    popup.classList.add("popup");
-
-    // Apply the popup styling
-    popup.style.position = 'fixed';
-    popup.style.top = '50%';
-    popup.style.left = '50%';
-    popup.style.transform = 'translate(-50%, -50%) scale(0.9)';
-    popup.style.backgroundColor = randomColor;  // Set the random color here
-    popup.style.padding = '20px';
-    popup.style.boxShadow = `12px 12px 2px 1px rgba(206, 108, 242, 0.2)`;
-    popup.style.zIndex = '10000';
-    popup.style.maxWidth = '70%';
-    popup.style.maxHeight = '70%';
-    popup.style.overflow = 'hidden';
-    popup.style.boxSizing = 'border-box';
-    popup.style.transition = 'all 0.3s ease-in-out';
-
-    // Add information that shows up on each object in the popup
-    let popupContent = `
-        <h2>${card1.querySelector(".card-back h3").textContent}</h2>
-        <p>People: ${card1.querySelector(".card-back p").textContent}</p>
-        <p>Backed up on: ${card1.getAttribute("data-backedUpDate")}</p>
-        <p>Camera Lens: ${card1.getAttribute("data-cameraLens")}</p>
-        <p>Screen Resolution: ${card1.getAttribute("data-screenResolution")}</p>
-        <p>Description: ${card1.getAttribute("data-description")}</p>
-    `;
-    popup.innerHTML = popupContent;
-
-    // Append the connected project sample if available
-    if (memory.sample) {
-        let sampleContainer = document.createElement('div');
-        sampleContainer.innerHTML = memory.sample;
-        popup.appendChild(sampleContainer);
-    }
-
-    // Create and append the close button
-    let closeButton = document.createElement('button');
-    closeButton.textContent = 'X';
-    closeButton.style.position = 'absolute';
-    closeButton.style.top = '10px';
-    closeButton.style.right = '10px';
-    closeButton.style.background = 'transparent';
-    closeButton.style.border = 'none';
-    closeButton.style.fontSize = '20px';
-    closeButton.style.cursor = 'pointer';
-
-    // Close the popup when the button is clicked
-    closeButton.addEventListener('click', () => {
-        document.body.removeChild(popup);
-        currentPopup = null;  // Reset currentPopup to allow for future popups
-    });
-
-    // Append the close button to the popup
-    popup.appendChild(closeButton);
-    
-    return popup;
-}
 };
 
 // Page load
