@@ -139,12 +139,6 @@ const memories = [
 // Establish functions and variables that allow for game to work
 let wrapper = document.querySelector(".wrapper");
 
-// colorList is used to change the background color 
-// of the popup which appears when a pair of cards is selected
-    // Based on Code Pen exercise from 
-    // WebDev course with Divya Mehra for random color: https://codepen.io/montse-p/pen/PwojGXg
-let colorList = ["#FFCCCB", "#FFD580", "#FFFFE0", "#90EE90", "#26F7FD", "#6D5ACF", "#CBC3E3"];
-
 // Event listener for dropdown
 window.addEventListener("load", () => {
     // Initializing dropdown items
@@ -311,13 +305,14 @@ function renderMemoryPairs(data, selectedCategory) {
         // Add new card
         wrapper.append(newDiv);
     });
+};
 
-  let flippedCards = [];
-  let matchedCards = [];
-  let currentPopup = null;
+let flippedCards = [];
+let matchedCards = [];
+let currentPopup = null;
 
     // Add click event listener to flip cards and check for matches
-    wrapper.addEventListener("click", (e) => {
+wrapper.addEventListener("click", (e) => {
         let clickedCard = e.target.closest(".card");
         // // log to check it's working
         // console.log(clickedCard);
@@ -373,75 +368,85 @@ function renderMemoryPairs(data, selectedCategory) {
         };
     });
 
+function createPopup(memory, card1) {
+    console.log("Popup Created for", card1.querySelector(".card-back h3").textContent);
+
+    let popup = document.createElement('div');
+    popup.classList.add("popup");
+
+        // colorList is used to change the background color 
+    // of the popup which appears when a pair of cards is selected
+    // Based on Code Pen exercise from 
+    // WebDev course with Divya Mehra for random color: https://codepen.io/montse-p/pen/PwojGXg
+    let colorList = ["#FFCCCB", "#FFD580", "#FFFFE0", "E0FFD6", "#26F7FD", "#6D5ACF", "#CBC3E3"];
+
     // Get a random color for the popup background
-        // Based on Code Pen exercise from WebDev course with Divya Mehra for random color: https://codepen.io/montse-p/pen/PwojGXg
     let randomColor = colorList[Math.floor(Math.random() * colorList.length)];
 
+    // Popup style CSS
+    popup.style.position = 'fixed';
+    popup.style.top = '50%';
+    popup.style.left = '50%';
+    popup.style.transform = 'translate(-50%, -50%) scale(0.9)';
+    popup.style.backgroundColor = randomColor;  // Set the random color
+    popup.style.padding = '20px';
+    popup.style.boxShadow = `12px 12px 2px 1px rgba(206, 108, 242, 0.2)`;
+    popup.style.zIndex = '10000';
+    popup.style.maxWidth = '70%';
+    popup.style.maxHeight = '70%';
+    popup.style.overflow = 'hidden';
+    popup.style.boxSizing = 'border-box';
+    popup.style.transition = 'all 0.3s ease-in-out';
 
-    function createPopup(memory, card1) {
-        console.log("Popup Created for", card1.querySelector(".card-back h3").textContent);
+    // When a popup comes up, the background secondary color will also change
+    document.body.style.backgroundImage = `
+    linear-gradient(-45deg, transparent 75%, ${randomColor}),
+    linear-gradient(45deg, transparent 75%, ${randomColor}),
+    linear-gradient(-135deg, transparent 75%, ${randomColor}),
+    linear-gradient(135deg, transparent 75%, ${randomColor})`;
 
-        let popup = document.createElement('div');
-        popup.classList.add("popup");
+    // Add information that shows up on each object in the popup
+    let popupContent = `
+        <h2>${card1.querySelector(".card-back h3").textContent}</h2>
+        <p>People: ${card1.querySelector(".card-back p").textContent}</p>
+        <p>Backed up on: ${card1.getAttribute("data-backedUpDate")}</p>
+        <p>Camera Lens: ${card1.getAttribute("data-cameraLens")}</p>
+        <p>Screen Resolution: ${card1.getAttribute("data-screenResolution")}</p>
+        <p>Description: ${card1.getAttribute("data-description")}</p>
+    `;
+    popup.innerHTML = popupContent;
 
-        // Popup style CSS
-        popup.style.position = 'fixed';
-        popup.style.top = '50%';
-        popup.style.left = '50%';
-        popup.style.transform = 'translate(-50%, -50%) scale(0.9)';
-        popup.style.backgroundColor = randomColor;  // Set the random color
-        popup.style.padding = '20px';
-        popup.style.boxShadow = `12px 12px 2px 1px rgba(206, 108, 242, 0.2)`;
-        popup.style.zIndex = '10000';
-        popup.style.maxWidth = '70%';
-        popup.style.maxHeight = '70%';
-        popup.style.overflow = 'hidden';
-        popup.style.boxSizing = 'border-box';
-        popup.style.transition = 'all 0.3s ease-in-out';
-
-        // Add information that shows up on each object in the popup
-        let popupContent = `
-            <h2>${card1.querySelector(".card-back h3").textContent}</h2>
-            <p>People: ${card1.querySelector(".card-back p").textContent}</p>
-            <p>Backed up on: ${card1.getAttribute("data-backedUpDate")}</p>
-            <p>Camera Lens: ${card1.getAttribute("data-cameraLens")}</p>
-            <p>Screen Resolution: ${card1.getAttribute("data-screenResolution")}</p>
-            <p>Description: ${card1.getAttribute("data-description")}</p>
-        `;
-        popup.innerHTML = popupContent;
-
-        // Append the connected project sample if available
-        if (memory.sample) {
-            let sampleContainer = document.createElement('div');
-            sampleContainer.innerHTML = memory.sample;
-            popup.appendChild(sampleContainer);
-        }
-
-        // Close button CSS style
-        let closeButton = document.createElement('button');
-        closeButton.innerHTML = '&times;' 
-            // How to use an entity with textContent
-            // https://stackoverflow.com/questions/49197622/how-to-use-an-entity-with-textcontent
-        closeButton.style.position = 'absolute';
-        closeButton.style.top = '10px';
-        closeButton.style.right = '20px';
-        closeButton.style.background = 'transparent';
-        closeButton.style.border = 'none';
-        closeButton.style.fontSize = '40px';
-        closeButton.style.cursor = 'pointer';
-
-        // Close the popup when the button is clicked
-        closeButton.addEventListener('click', () => {
-            document.body.removeChild(popup);
-            currentPopup = null;  // Reset currentPopup to allow for future popups
-        });
-
-        // Append the close button to the popup
-        popup.appendChild(closeButton);
-
-        return popup;
+    // Append the connected project sample if available
+    if (memory.sample) {
+        let sampleContainer = document.createElement('div');
+        sampleContainer.innerHTML = memory.sample;
+        popup.appendChild(sampleContainer);
     }
-};
+
+    // Close button CSS style
+    let closeButton = document.createElement('button');
+    closeButton.innerHTML = '&times;' 
+        // How to use an entity with textContent
+        // https://stackoverflow.com/questions/49197622/how-to-use-an-entity-with-textcontent
+    closeButton.style.position = 'absolute';
+    closeButton.style.top = '10px';
+    closeButton.style.right = '20px';
+    closeButton.style.background = 'transparent';
+    closeButton.style.border = 'none';
+    closeButton.style.fontSize = '40px';
+    closeButton.style.cursor = 'pointer';
+
+    // Close the popup when the button is clicked
+    closeButton.addEventListener('click', () => {
+        document.body.removeChild(popup);
+        currentPopup = null;  // Reset currentPopup to allow for future popups
+    });
+
+    // Append the close button to the popup
+    popup.appendChild(closeButton);
+
+    return popup;
+}
 
 // Page load
 renderMemoryPairs(memories, "all");

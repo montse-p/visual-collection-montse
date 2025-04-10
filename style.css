@@ -48,21 +48,21 @@ body {
     background: rgb(157, 230, 166);
     background-image:
         linear-gradient(
-        -45deg,
-        transparent 75%,
-        rgb(255, 194, 250)),
-        linear-gradient(
-        45deg,
-        transparent 75%,
-        rgb(255, 194, 250)),
-        linear-gradient(
-        -135deg,
-        transparent 75%,
-        rgb(255, 194, 250)),
-        linear-gradient(
-        135deg,
-        transparent 75%,
-        rgb(255, 194, 250));
+            -45deg,
+            transparent 75%,
+            rgb(255, 194, 250)),
+            linear-gradient(
+            45deg,
+            transparent 75%,
+            rgb(255, 194, 250)),
+            linear-gradient(
+            -135deg,
+            transparent 75%,
+            rgb(255, 194, 250)),
+            linear-gradient(
+            135deg,
+            transparent 75%,
+            rgb(255, 194, 250));
     background-size: 4rem 4rem;
     background-position: 2rem 0, 2rem 0, 0 0, 0 0;
 }
