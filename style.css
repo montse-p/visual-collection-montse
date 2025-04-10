@@ -160,13 +160,6 @@ https://www.w3schools.com/css/css_pseudo_elements.asp */
 /* From the Divya Mehra's "05_dynamically_adding_content"
 https://github.com/divya-mehra/dhwebdev-s25/tree/05a4413abfbec565bc2ae32d0bd6457e10c3464f/05_changing_display_with_dropdown */
 
-/* FIX THERE ARE 2 OF THESE */
-/* body {
-    max-width: 1000px;
-    margin: 0 auto;
-    font-family: Helvetica, sans-serif;
-} */
-
 .wrapper {
     display: grid;
     /* Create Responsive CSS Grid Layouts with GRID WRAPPING
@@ -178,26 +171,11 @@ https://github.com/divya-mehra/dhwebdev-s25/tree/05a4413abfbec565bc2ae32d0bd6457
     perspective: 1000px;
 }
 
-/* .filters {
-    display: flex;
-    gap: 2em;
-    height: 50px;
-    display: fixed;
-    align-items: center;
-    top: 0;
-    
-} */
-
 .filter {
     cursor: pointer;
     padding:  0.2em 0.5em;
 }
 
-
-/* FIX UMBRELLA SIZING */
-
-
-/* I FORGOT WHAT THIS WAS FOR */
 .wrapper > * {
     aspect-ratio: 2/3;
     /* width: 15 rem;
@@ -236,6 +214,7 @@ https://github.com/divya-mehra/dhwebdev-s25/tree/05a4413abfbec565bc2ae32d0bd6457
     /* perspective: none;  */
     /* perspective: 1000px;  */
     /* Perspective is for 3D effect */
+    padding:0px;
     margin: 10px;
     display: inline-block;
     border: 1px solid #f1f1f1;
@@ -278,3 +257,10 @@ by nvite 8008: https://codepen.io/nvite8008/pen/rNrwBMV */
   .card.flipped .card-back {
     transform: rotateY(0deg);
   }
+
+/* For image content to fit on the popup better */
+img {
+  max-width: 100%;
+  max-height: 60vh;
+  margin: 5px auto;
+}

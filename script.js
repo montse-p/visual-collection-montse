@@ -374,11 +374,11 @@ function createPopup(memory, card1) {
     let popup = document.createElement('div');
     popup.classList.add("popup");
 
-        // colorList is used to change the background color 
+    //     // colorList is used to change the background color 
     // of the popup which appears when a pair of cards is selected
     // Based on Code Pen exercise from 
     // WebDev course with Divya Mehra for random color: https://codepen.io/montse-p/pen/PwojGXg
-    let colorList = ["#FFCCCB", "#FFD580", "#FFFFE0", "E0FFD6", "#26F7FD", "#6D5ACF", "#CBC3E3"];
+    let colorList = ["#FFCCCB", "#FFD580", "#FFFFE0", "#E0FFD6", "#26F7FD", "#6D5ACF", "#CBC3E3"];
 
     // Get a random color for the popup background
     let randomColor = colorList[Math.floor(Math.random() * colorList.length)];
@@ -389,11 +389,13 @@ function createPopup(memory, card1) {
     popup.style.left = '50%';
     popup.style.transform = 'translate(-50%, -50%) scale(0.9)';
     popup.style.backgroundColor = randomColor;  // Set the random color
+    // popup.style.backgroundColor = getRandomColors(1)[0];  
+        // Set 1 random color; index 0 (so first one in the randomColors array)
     popup.style.padding = '20px';
     popup.style.boxShadow = `12px 12px 2px 1px rgba(206, 108, 242, 0.2)`;
     popup.style.zIndex = '10000';
-    popup.style.maxWidth = '70%';
-    popup.style.maxHeight = '70%';
+    popup.style.maxWidth = '90vw';
+    popup.style.maxHeight = '85vh';
     popup.style.overflow = 'hidden';
     popup.style.boxSizing = 'border-box';
     popup.style.transition = 'all 0.3s ease-in-out';
@@ -404,6 +406,47 @@ function createPopup(memory, card1) {
     linear-gradient(45deg, transparent 75%, ${randomColor}),
     linear-gradient(-135deg, transparent 75%, ${randomColor}),
     linear-gradient(135deg, transparent 75%, ${randomColor})`;
+
+    // CSS gradient patterns
+    // This array will allow for background image patterns to change
+    // I based this off of the colorList array and I had tried using 
+    // randomColor to change the backgroundImage color, 
+    // but I wanted to change the background pattern as well.
+    // The patterns are based off of blog https://cssgradient.io/blog/gradient-patterns/
+    const backgroundPatterns = [
+        `
+        background-color: ${randomColor};
+        background-image: linear-gradient(90deg, transparent 50%, ${randomColor} 50%);
+        background-size: 50px 50px;
+        `,
+        `
+        background-image:
+        linear-gradient(45deg, ${randomColor}, transparent 25%),
+        linear-gradient(-45deg, ${randomColor}, transparent 25%),
+        linear-gradient(45deg, transparent 75%, ${randomColor} 75%),
+        linear-gradient(-45deg, transparent 75%, ${randomColor} 75%);
+        background-size: 20px 20px;
+        background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        `,
+        `
+        background:
+        radial-gradient(circle at 100% 50%, transparent 20%,${randomColor} 21%, ${randomColor} 34%, transparent 35%, transparent),
+        radial-gradient(circle at 0% 50%, transparent 20%,${randomColor} 21%, ${randomColor} 34%, transparent 35%, transparent) 0 -50px;
+        `
+    ];
+
+//     // I use same logic as randomColor for random background pattern
+//     let randomPattern = backgroundPatterns[Math.floor(Math.random() * backgroundPatterns.length)]
+//     console.log("Random Pattern: ", randomPattern);
+//     document.body.style.background = "none";
+//     document.body.style.backgroundSize = ""; // Clear any previously set background size
+// document.body.style.backgroundPosition = ""; // Clear any previously set background position
+//     // document.body.style.setProperty('background-image', randomPattern, 'important');
+//     // document.body.style.backgroundImage = randomPattern
+
+//     document.body.style.backgroundImage = randomPattern; // Apply the random pattern to the background
+//     document.body.style.backgroundSize = 'cover';  // Make sure the pattern covers the whole body
+//     document.body.style.backgroundPosition = 'center'; // Center the background if needed
 
     // Add information that shows up on each object in the popup
     let popupContent = `
