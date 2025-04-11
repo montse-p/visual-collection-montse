@@ -1,5 +1,5 @@
 //Adds memory objects as const
-    // From the "05_dynamically_adding_content"
+    // From Divya Mehra: "dynamically_adding_content"
 const memories = [
     {
         id: 1,
@@ -206,6 +206,7 @@ window.addEventListener("load", () => {
         });
     });
 });
+// End of Event Listener for dropdown
 
 // If function is called, the dropdown opens
 function openDropdown() {
@@ -264,7 +265,7 @@ function renderMemoryPairs(data, selectedCategory) {
     let memoryPairs = [];
   
     // ChatGPT recommended using a spread operator to make a shallow copy {...memory}
-    // since referencing one object might affect the synchronization of cards flipped or not
+    // since referencing one object might affect the "synchronization" of cards flipped or not
     filteredData.forEach(memory => {
         memoryPairs.push({ ...memory }, { ...memory });
     });
@@ -306,12 +307,13 @@ function renderMemoryPairs(data, selectedCategory) {
         wrapper.append(newDiv);
     });
 };
+// End of renderMemoryPairs function
 
 let flippedCards = [];
 let matchedCards = [];
 let currentPopup = null;
 
-    // Add click event listener to flip cards and check for matches
+// Add click event listener to flip cards and check for matches
 wrapper.addEventListener("click", (e) => {
         let clickedCard = e.target.closest(".card");
         // // log to check it's working
@@ -368,13 +370,17 @@ wrapper.addEventListener("click", (e) => {
         };
     });
 
+
+// Function for the popup
+    // Before, I had this funciton within my event listener to flip cards
+    // but it meant that I was getting multiple popups for each card that was pressed (rather than just one popup for a matching pair)
 function createPopup(memory, card1) {
     console.log("Popup Created for", card1.querySelector(".card-back h3").textContent);
 
     let popup = document.createElement('div');
     popup.classList.add("popup");
 
-    //     // colorList is used to change the background color 
+    // colorList is used to change the background color 
     // of the popup which appears when a pair of cards is selected
     // Based on Code Pen exercise from 
     // WebDev course with Divya Mehra for random color: https://codepen.io/montse-p/pen/PwojGXg
@@ -389,8 +395,6 @@ function createPopup(memory, card1) {
     popup.style.left = '50%';
     popup.style.transform = 'translate(-50%, -50%) scale(0.9)';
     popup.style.backgroundColor = randomColor;  // Set the random color
-    // popup.style.backgroundColor = getRandomColors(1)[0];  
-        // Set 1 random color; index 0 (so first one in the randomColors array)
     popup.style.padding = '20px';
     popup.style.boxShadow = `12px 12px 2px 1px rgba(206, 108, 242, 0.2)`;
     popup.style.zIndex = '10000';
@@ -434,19 +438,6 @@ function createPopup(memory, card1) {
         radial-gradient(circle at 0% 50%, transparent 20%,${randomColor} 21%, ${randomColor} 34%, transparent 35%, transparent) 0 -50px;
         `
     ];
-
-//     // I use same logic as randomColor for random background pattern
-//     let randomPattern = backgroundPatterns[Math.floor(Math.random() * backgroundPatterns.length)]
-//     console.log("Random Pattern: ", randomPattern);
-//     document.body.style.background = "none";
-//     document.body.style.backgroundSize = ""; // Clear any previously set background size
-// document.body.style.backgroundPosition = ""; // Clear any previously set background position
-//     // document.body.style.setProperty('background-image', randomPattern, 'important');
-//     // document.body.style.backgroundImage = randomPattern
-
-//     document.body.style.backgroundImage = randomPattern; // Apply the random pattern to the background
-//     document.body.style.backgroundSize = 'cover';  // Make sure the pattern covers the whole body
-//     document.body.style.backgroundPosition = 'center'; // Center the background if needed
 
     // Add information that shows up on each object in the popup
     let popupContent = `
